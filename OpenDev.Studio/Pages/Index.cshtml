@@ -1,0 +1,50 @@
+﻿@page
+@using System.Net;
+@using System.Text;
+@using Newtonsoft.Json;
+@using OpenDev.Common.ApiModel;
+@using OpenDev
+@using OpenDev.Common.Global;
+@using OpenDev.Core.Engine;
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    string formKey = (Request.Query["p"] + "");
+    var appKey = (Request.Query["a"] + "");
+    if (string.IsNullOrEmpty(formKey))
+        formKey = "index";
+    if (string.IsNullOrEmpty(appKey))
+        appKey = "core";
+    var keys = Request.Query.Keys;
+    var parameters = new List<ParamData>();
+    foreach (var key in keys)
+    {
+        if (key != "p")
+            parameters.Add(new ParamData()
+                    {
+                        Name = key,
+                        Value = Request.Query[key] + ""
+                    });
+    }
+    if (Request.HasFormContentType)
+    {
+        var postKeys = Request.Form.Keys.ToList();
+        foreach (var key in postKeys)
+        {
+            parameters.Add(new ParamData()
+                    {
+                        Name = key,
+                        Value = Request.Form[key] + ""
+                    });
+        }
+    }
+    var renderRequestApiModel = new RenderRequest()
+            {
+                AppKey = appKey,
+                FormKey = formKey,
+                RequestParamList = parameters
+            };
+    var viewEngine = new ViewEngine(renderRequestApiModel);
+    var responseModel = await viewEngine.View();
+}
+@Html.Raw(responseModel.HTML)

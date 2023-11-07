@@ -1,0 +1,47 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Transitions</h1>
+        Anytime you load new content, regardless the method, you can specify a transition type. If transition is not specified, then
+        the default will be used. All transitions are done with w2utils.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<button id="openPopup" class="w2ui-btn">Open Popup</button>
+
+<!--CODE-->
+<script type="module">
+import { w2popup, w2utils, query } from '__W2UI_PATH__'
+
+let last_index, last_trans
+if (typeof last_trans == 'undefined') {
+    last_index = 2
+    last_trans = ''
+}
+
+query('#openPopup').on('click', () => {
+    w2popup.load({ url: 'data/popup3.html' }).then(() => {
+        query('#w2ui-popup #load').on('click', load)
+    })
+})
+
+function load() {
+    let trans = (last_trans == "" ? query('#trans option:nth-child('+ last_index +')').val() : query('#trans').val())
+    last_trans = query('#trans').val()
+    w2popup.load({
+        url: 'data/popup3.html',
+        transition: trans,
+        async onOpen(event) {
+            await event.complete
+            query('#w2ui-popup #trans').val(last_trans)
+            query('#w2ui-popup #load').on('click', load)
+        }
+    })
+    last_index++
+    if (last_index > 11) last_index = 2
+}
+</script>
+
+<!--CODE-->

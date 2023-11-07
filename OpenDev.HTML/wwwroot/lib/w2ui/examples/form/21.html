@@ -1,0 +1,71 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Custom Errors</h1>
+        You can attach to the validate event and do custom validation and add them to the errors list.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="form" style="width: 750px;"></div>
+<br>
+
+<!--CODE-->
+<script type="module">
+import { w2form, w2ui, w2popup, w2alert } from '__W2UI_PATH__'
+
+let form = new w2form({
+    box: '#form',
+    name: 'form',
+    url: 'server/post',
+    fields: [
+        { field: 'first_name', type: 'text', required: true,
+            html: { label: 'First Name', attr: 'style="width: 200px"' }
+        },
+        { field: 'last_name',  type: 'text', required: true,
+            html: { label: 'Last Name', attr: 'style="width: 200px"' }
+        },
+        { field: 'comments', type: 'textarea',
+            html: { label: 'Comments', attr: 'style="width: 200px; height: 60px"' }
+        },
+        { field: 'city', type: 'text',
+            html: { label: 'City', attr: 'style="width: 200px"', column: 2, }
+        },
+        { field: 'state', type: 'text',
+            html: { label: 'State', attr: 'style="width: 50px"', column: 2, }
+        },
+        { field: 'zip', type: 'text',
+            html: { label: 'Zip Code', attr: 'style="width: 100px"', column: 2, }
+        },
+        { field: 'street', type: 'text',
+            html: { label: 'Street', attr: 'style="width: 200px"', column: 2, }
+        },
+    ],
+    onValidate(event) {
+        if (String(this.record.state).length != 2) {
+            // add custom error
+            event.detail.errors.push({
+                error: 'Must be 2 characters long',
+                field: this.get('state')
+            })
+        }
+    },
+    actions: {
+        Reset(event) {
+            this.clear()
+        },
+        Save(event) {
+            if (w2ui.form.validate().length == 0) {
+                w2popup.open({
+                    title: 'Form Data',
+                    with: 600,
+                    height: 550,
+                    body: `<pre>${JSON.stringify(this.getCleanRecord(), null, 4)}</pre>`,
+                    actions: { Ok: w2popup.close }
+                })
+            }
+        }
+    }
+})
+</script>

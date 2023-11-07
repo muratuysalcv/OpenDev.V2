@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAYbLtn4ms3kWXPe9qRUOD4wAAAAACAAAAAAAQZgAAAAEAACAAAACsrGb635jRvdN1KWRfTnaBpzIr8hD037ORf3nBDwrl9QAAAAAOgAAAAAIAACAAAABIfPB57MsFPP2z5cWgCM8JJSpD66YMZGUcP6wXOLFC1SAAAADPhLJcb1bGrtwTvu1PgxgGS2d1qNCUyb6e4uX3R/0PfUAAAABMkC5hqxegd0qlUpL8fylUJSGybSqBLMFxjOL5gxN8j6ox1gO66/gS8NDqu/qu4HnTenF1TMLlK3J3dtfzwhNn</EncryptedPassword>
+    <_PublishTargetUrl>ftp://server.opndv.com/html</_PublishTargetUrl>
+    <History>True|2023-03-30T15:10:41.0849221Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>03/30/2023 17:52:42</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>03/30/2023 17:52:42</publishTime>
+    </File>
+    <File Include="OpenDev.HTML.deps.json">
+      <publishTime>03/30/2023 18:10:17</publishTime>
+    </File>
+    <File Include="OpenDev.HTML.dll">
+      <publishTime>03/30/2023 18:10:17</publishTime>
+    </File>
+    <File Include="OpenDev.HTML.exe">
+      <publishTime>03/30/2023 18:10:17</publishTime>
+    </File>
+    <File Include="OpenDev.HTML.pdb">
+      <publishTime>03/30/2023 18:10:17</publishTime>
+    </File>
+    <File Include="OpenDev.HTML.runtimeconfig.json">
+      <publishTime>03/30/2023 18:10:17</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>03/30/2023 18:10:21</publishTime>
+    </File>
+    <File Include="wwwroot/favicon.ico">
+      <publishTime>03/30/2023 17:52:42</publishTime>
+    </File>
+    <File Include="wwwroot/lib/base/__manifest.json">
+      <publishTime>03/27/2023 02:34:51</publishTime>
+    </File>
+    <File Include="wwwroot/lib/codemirror/package.json">
+      <publishTime>03/18/2023 00:53:52</publishTime>
+    </File>
+    <File Include="wwwroot/lib/__manifest.json">
+      <publishTime>03/27/2023 02:22:41</publishTime>
+    </File>
+    <File Include="wwwroot/OpenDev.HTML.styles.css">
+      <publishTime>03/30/2023 18:10:17</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

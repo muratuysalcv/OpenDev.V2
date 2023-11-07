@@ -1,0 +1,44 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Panel with Title</h1>
+        <p>
+        A layout panel may be created with a title.
+        </p>
+
+        <p>
+        You can dynamically load content into the main panel; this is done so you can observe the overflow behavior of the panel (scrollbars).
+        </p>
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="layout" style="width: 900px; height: 400px;"></div>
+
+<div style="height: 20px;"></div>
+
+<span style="display: inline-block; width: 50px;"> Main: </span>
+<button class="w2ui-btn" onclick="action('html', 'main', 'This is some content set manually')">Set Content</button>
+<button class="w2ui-btn" onclick="action('load', 'main', 'data/content1.html')">Load Content 1</button>
+<button class="w2ui-btn" onclick="action('load', 'main', 'data/content2.html')">Load Content 2</button>
+
+<!--CODE-->
+<script type="module">
+import { w2layout } from '__W2UI_PATH__'
+
+let pstyle = 'border: 1px solid #efefef; padding: 5px'
+let layout = new w2layout({
+    box: '#layout',
+    name: 'layout',
+    panels: [
+        { type: 'top', size: 100, resizable: true, style: pstyle, html: 'top', title: 'top title' },
+        { type: 'left', size: 200, resizable: true, style: pstyle, html: 'left', title: 'left title' },
+        { type: 'main', style: pstyle, html: 'main', title: 'Main Title'}
+    ]
+})
+
+window.action = function(method, param1, param2, param3) {
+    layout[method](param1, param2, param3)
+}
+</script>

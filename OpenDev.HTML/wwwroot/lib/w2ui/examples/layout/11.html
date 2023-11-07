@@ -1,0 +1,45 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Panel Messages</h1>
+        <p>
+        You can slide a message for the panel
+        </p>
+
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="layout" style="width: 900px; height: 300px;"></div>
+
+<div style="height: 20px;"></div>
+
+<button class="w2ui-btn" onclick="showMessage('main')">Show Message</button>
+<button class="w2ui-btn" onclick="showConfirm('main')">Show Confirmation (2.0+)</button>
+
+<!--CODE-->
+<script type="module">
+import { w2layout } from '__W2UI_PATH__'
+
+let pstyle = 'border: 1px solid #efefef; padding: 5px'
+let layout = new w2layout({
+    box: '#layout',
+    name: 'layout',
+    panels: [
+        { type: 'left', size: 200, resizable: true, style: pstyle, html: 'left' },
+        { type: 'main', style: pstyle, html: 'main' }
+    ]
+})
+
+window.showMessage = function(panel) {
+    layout.message('main', `<div class="w2ui-centered">Some Text ${Date.now()}</div>`)
+        .ok(event => { console.log('Ok btn', event.detail) })
+}
+
+window.showConfirm = function(panel) {
+    layout.confirm('main', 'Confirmation')
+        .yes(event => { console.log('Yes btn', event.detail) })
+        .no(event => { console.log('No btn', event.detail) })
+}
+</script>

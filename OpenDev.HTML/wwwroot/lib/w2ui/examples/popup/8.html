@@ -1,0 +1,68 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Context Dialog</h1>
+        Common dialog can also be used when popup is opened. In this case, they will be opened as context messages.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<button class="w2ui-btn" onclick="popup()">Open Popup</button>
+
+<!--CODE-->
+<script type="module">
+import { w2popup, w2alert, w2confirm, w2prompt } from '__W2UI_PATH__'
+let counter;
+
+window.popup = function() {
+    w2popup.open({
+        width: 580,
+        height: 350,
+        title: 'Title',
+        text: 'This is text inside the popup',
+        actions: {
+            Alert() {
+                w2alert('Some message')
+                    .ok(event => { console.log('Closed') })
+            },
+            Confirm() {
+                w2confirm('Some question')
+                    .yes(event => { console.log('Yes') })
+                    .no(event => { console.log('No') })
+            },
+            Prompt() {
+                w2prompt('Some question')
+                    .ok(event => {
+                        console.log('value=', event.detail.value)
+                    })
+                    .cancel(() => {
+                        console.log('Canceled')
+                    })
+            },
+            More() {
+                counter = 0
+                show()
+            }
+        },
+        showMax: true
+    });
+}
+
+window.show = function() {
+    w2popup.message({
+        width: 350,
+        height: 170,
+        text: 'Are you sure (click No). ' + (counter || ''),
+        actions: {
+            Ok() {
+                w2popup.message()
+            },
+            More() {
+                show()
+            }
+        }
+    });
+    counter++;
+}
+</script>

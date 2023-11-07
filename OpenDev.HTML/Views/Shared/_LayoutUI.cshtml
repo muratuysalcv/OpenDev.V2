@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] - OpenDev.HTML</title>
+    <link href="~/lib/dist/w2ui-1.5.css" rel="stylesheet" />
+@*    <link href="~/lib/w2ui/w2ui-dark-1.5.css" rel="stylesheet" />*@
+    <script src="~/lib/js/jquery.min.js"></script>
+    <script src="~/lib/dist/w2ui-1.5.js"></script>
+    <script>
+        w2utils.locale(['/lib/src/locale/tr-tr.json', 'tr-tr']);
+    </script>
+</head>
+<body>
+
+        @RenderBody()
+
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+
+

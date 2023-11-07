@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Sources\OpenDev\OpenDev.App\bin\Release\net7.0\publish\</_PublishTargetUrl>
+    <History>True|2023-03-26T04:30:46.8038170Z;True|2023-03-26T07:28:14.8139701+03:00;True|2023-03-26T00:48:20.7720647+03:00;True|2023-03-26T00:43:09.0884432+03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

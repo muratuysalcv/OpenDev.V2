@@ -1,0 +1,32 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Enable/Disable Buttons</h1>
+        It is easy to enable and disable buttons during the run time. The example below demonstrates how to do this.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="toolbar"></div>
+
+<!--CODE-->
+<script type="module">
+import { w2toolbar } from '__W2UI_PATH__'
+
+new w2toolbar({
+    box: '#toolbar',
+    name: 'toolbar',
+    items: [
+        { type: 'button', id: 'enable', text: 'Enable', icon: 'w2ui-icon-check' },
+        { type: 'button', id: 'disable', text: 'Disable', icon: 'w2ui-icon-cross' },
+        { type: 'break',  id: 'break0' },
+        { type: 'button', id: 'btn', text: 'Action Button', icon: 'w2ui-icon-info', disabled: true },
+        { type: 'button', id: 'btn2', text: 'Other Button', icon: 'w2ui-icon-paste' }
+    ],
+    onClick(event) {
+        if (event.target == 'enable') this.enable('btn')
+        if (event.target == 'disable') this.disable('btn')
+    }
+})
+</script>

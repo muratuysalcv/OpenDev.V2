@@ -1,0 +1,10 @@
+
+*.vsidx
+.vs/OpenDev/v17/.suo
+*.cache
+*.dll
+*.cache
+*.cache
+*.csproj.AssemblyReference.cache
+*.suo
+*.v2

@@ -1,0 +1,58 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Panel with Tabs</h1>
+        <p>
+        A layout panel may be created with tabs. It uses w2tabs object, therefore, you can use anything w2tabs support. There
+        is no need to define a name of the tabs, because it will be overwritten with layout.name + '_tabs'. It will also add tabs.owner
+        attribute that is a reference to the layout.
+        </p>
+
+        <p>
+        You can dynamically load content into the main panel; this is done so you can observe the overflow behavior of the panel (scrollbars).
+        </p>
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="layout" style="width: 900px; height: 400px;"></div>
+
+<div style="height: 20px;"></div>
+
+<span style="display: inline-block; width: 50px;"> Main: </span>
+<button class="w2ui-btn" onclick="action('html', 'main', 'This is some content set manually')">Set Content</button>
+<button class="w2ui-btn" onclick="action('load', 'main', 'data/content1.html')">Load Content 1</button>
+<button class="w2ui-btn" onclick="action('load', 'main', 'data/content2.html')">Load Content 2</button>
+
+<!--CODE-->
+<script type="module">
+import { w2layout } from '__W2UI_PATH__'
+
+let pstyle = 'border: 1px solid #efefef; padding: 5px'
+let layout = new w2layout({
+    box: '#layout',
+    name: 'layout',
+    panels: [
+        { type: 'top', size: 50, resizable: true, style: pstyle, html: 'top' },
+        { type: 'left', size: 200, resizable: true, style: pstyle, html: 'left' },
+        { type: 'main', style: pstyle, html: 'main',
+            tabs: {
+                active: 'tab1',
+                tabs: [
+                    { id: 'tab1', text: 'Tab 1' },
+                    { id: 'tab2', text: 'Tab 2' },
+                    { id: 'tab3', text: 'Tab 3' }
+                ],
+                onClick (event) {
+                    this.owner.html('main', event.target);
+                }
+            }
+        }
+    ]
+})
+
+window.action = function(method, param1, param2, param3) {
+    layout[method](param1, param2, param3)
+}
+</script>

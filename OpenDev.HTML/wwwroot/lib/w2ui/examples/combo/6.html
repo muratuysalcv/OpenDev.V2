@@ -1,0 +1,60 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Tabs with Content</h1>
+        Since w2tab is just a tab strip, you need to create a container for the data. Below is the example of tabs with such
+        containers.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<style>
+.tab-content {
+    width: 700px;
+    height: 300px;
+    background-color: #fafafa;
+    border-top: 0px;
+    display: none;
+    padding: 10px;
+    overflow: auto;
+}
+</style>
+
+<div id="tab-example">
+    <div id="tabs" style="width: 700px"></div>
+    <div id="tab1" class="tab-content">
+        First tab.
+    </div>
+    <div id="tab2" class="tab-content">
+        Second tab, with some HTML in it. :)
+    </div>
+    <div id="tab3" class="tab-content">
+        What did you expect, of course it is the third tab.
+    </div>
+</div>
+
+<!--CODE-->
+<script type="module">
+import { w2tabs, query } from '__W2UI_PATH__'
+
+let config = {
+    tabs: {
+        name: 'tabs',
+        box: '#tabs',
+        active: 'tab1',
+        tabs: [
+            { id: 'tab1', text: 'Tab 1' },
+            { id: 'tab2', text: 'Tab 2' },
+            { id: 'tab3', text: 'Tab 3' },
+        ],
+        onClick(event) {
+            query('#tab-example .tab-content').hide()
+            query(`#tab-example #${event.target}`).show()
+        }
+    }
+}
+
+let tabs = new w2tabs(config.tabs)
+query('#tab1').show()
+</script>

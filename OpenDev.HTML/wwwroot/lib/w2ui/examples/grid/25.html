@@ -1,0 +1,35 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Reorder Grid Columns</h1>
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="grid" style="width: 700px; height: 400px;"></div>
+
+<!--CODE-->
+<script type="module">
+import { w2grid } from '__W2UI_PATH__'
+
+let grid = new w2grid({
+    name: 'grid',
+    box: '#grid',
+    show: {
+        footer: true,
+        lineNumbers : true,
+        selectColumn: true
+    },
+    reorderColumns: true,
+    columns: [
+        { field: 'recid', text: 'Recid', size: '50px', sortable: true, resizable: true, hidden: true },
+        { field: 'fname', text: 'First Name', size: '100px', sortable: true, resizable: true },
+        { field: 'lname', text: 'Last Name', size: '100px', sortable: true, resizable: true },
+        { field: 'email', text: 'Email', size: '100%', sortable: true, resizable: true },
+        { field: 'profit', text: 'Profit', size: '120px', render: 'money', sortable: true, resizable: true, render: () => 'empty' },
+        { field: 'sdate', text: 'Start Date', size: '120px', render: 'date', sortable: true, resizable: true }
+    ]
+})
+grid.load('data/list.json')
+</script>

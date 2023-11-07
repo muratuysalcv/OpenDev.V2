@@ -1,0 +1,61 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Live Search</h1>
+        Auto search on key presss with extra options - see example below.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="grid" style="width: 600px; height: 350px; overflow: hidden;"></div>
+<br>
+<div style="float: left">
+    <label style="position: relative; top: 3px; left: 10px">
+        <input type="checkbox" id="singleOrMulti" style="position: relative; top: 1px; left: -2px;" onclick="setMulti(this)">
+        Multi Field Search
+    </label>
+</div>
+<div style="float: left; margin-left: 30px; margin-top: 1px;">
+    Operator:
+    <select class="w2ui-input" onchange="setOperator(this.value)">
+        <option value="is">is</option>
+        <option value="begins">begins</option>
+        <option value="contains" selected>contains</option>
+        <option value="ends">ends</option>
+    </select>
+</div>
+<div style="clear:both; height: 10px;"></div>
+
+<!--CODE-->
+<script type="module">
+import { w2grid } from '__W2UI_PATH__'
+
+let grid = new w2grid({
+    box: '#grid',
+    name: 'grid',
+    liveSearch: true,
+    multiSearch: false,
+    show: { toolbar: true, },
+    columns: [
+        { field: 'lname', text: 'Last Name', size: '30%', searchable: { operator: 'contains' }, sortable: true },
+        { field: 'fname', text: 'First Name', size: '30%', searchable: { operator: 'contains' }, sortable: true },
+        { field: 'email', text: 'Email', size: '40%', sortable: true },
+        { field: 'sdate', text: 'Start Date', size: '120px', sortable: true }
+    ]
+})
+grid.load('data/list.json')
+
+window.setMulti = function(el) {
+    grid.multiSearch = el.checked
+    grid.searchReset()
+    grid.refresh()
+}
+
+window.setOperator = function(op) {
+    grid.searches.forEach(search => { search.operator = op })
+    grid.searchReset()
+}
+</script>
+
+<!--CODE-->

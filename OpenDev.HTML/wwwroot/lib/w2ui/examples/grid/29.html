@@ -1,0 +1,130 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Advanced Row/Cell Styling</h1>
+        You can style individual cells as well as whole rows by applying a CSS style or a CSS class with
+        <i>record.w2ui = { ... }.</i> (see below)
+        <div style="height: 20px"></div>
+        You can also format whole columns by setting a column renderer - either a function or by choosing an existing
+        formatter or by extending <i>w2utils.formatters</i>.
+        <div style="height: 20px"></div>
+        In the example below the column <b>'Start Date'</b> has a custom formatter applied to center <i>valid</i> values.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<style>
+.row, .cell1 {
+    font-style: italic;
+    color: blue !important;
+}
+.cell2 {
+    font-weight: bold;
+    background-color: yellow;
+}
+</style>
+<div id="grid" style="width: 950px; height: 350px;"></div>
+<br>
+<button class="w2ui-btn" onclick="styleToggle(2)">Toggle #2</button>
+<button class="w2ui-btn" onclick="styleToggle(3)">Toggle #3</button>
+<button class="w2ui-btn" onclick="styleToggle(4)">Toggle #4</button>
+<button class="w2ui-btn" onclick="styleToggle(5)">Toggle #5</button>
+<button class="w2ui-btn" onclick="styleToggle(8)">Toggle #8</button>
+<button class="w2ui-btn" onclick="styleToggle(9)">Toggle #9</button>
+
+<!--CODE-->
+<script type="module">
+import { w2grid, w2utils } from '__W2UI_PATH__'
+
+w2utils.formatters.custom_centered = function(value, params, record) {
+    if (!value) {
+        return 'Bad Date!'
+    }
+    return '<div style="text-align: center">'+ value +'</div>'
+}
+
+let grid = new w2grid({
+    name: 'grid',
+    box: '#grid',
+    show: {
+        lineNumbers: true,
+    },
+    columns: [
+        { field: 'fname', text: 'First Name', size: '120px', info: true },
+        { field: 'lname', text: 'Last Name', size: '120px',
+            render(record, extra) {
+                if (extra.value === 'W2ui') {
+                    return '<a href="http://w2ui.com" target="_blank" title="Click Me!"><u>http://w2ui.com</u></a>'
+                }
+                return extra.value
+            }
+        },
+        { field: 'email', text: 'Email', size: '150px' },
+        { field: 'sdate', text: 'Start Date', size: '100px', render: 'custom_centered' },
+        { field: 'comment', text: 'Comment', size: '100%' },
+    ],
+    "records": [
+        { recid: 1, fname: "John", lname: "Doe", email: "jdoe@gmail.com", sdate: "4/3/2012", comment: "not styled" },
+        { recid: 2, fname: "Stuart", lname: "Motzart", email: "jdoe@gmail.com", sdate: "4/3/2012", comment: 'w2ui: { style: "background-color: #C2F5B4" }', w2ui: { style: "background-color: #C2F5B4" } },
+        { recid: 3, fname: "Jin", lname: "Franson", email: "jdoe@gmail.com", sdate: "4/3/2012", comment: 'w2ui: { class: "row" }', w2ui: { class: "row" } },
+        { recid: 4, fname: "Susan", lname: "Ottie", email: "jdoe@gmail.com", sdate: "4/3/2012", comment: 'w2ui: { style: { lname: "background: red;", email: "font-weight: bold;" } }', w2ui: { style: { lname: "background: red;", email: "font-weight: bold;" } } },
+        { recid: 5, fname: "Kelly", lname: "Silver", email: "jdoe@gmail.com", sdate: "4/3/2012", comment: 'w2ui: { class: { fname: "cell1", sdate: "cell2" } }', w2ui: { class: { fname: "cell1", sdate: "cell2" } } },
+        { recid: 6, fname: "Francis", lname: "W2ui", email: "jdoe@gmail.com", sdate: "4/3/2012", comment: '"Last Name" modified by column renderer' },
+        { recid: 7, fname: "Sergei", lname: "Rachmaninov", email: "jdoe@gmail.com", sdate: 0, comment: "not styled" },
+        { recid: 8, fname: "Mike", lname: "Scotty", email: "mscotty@gmail.com", sdate: "11/11/2022", comment: "styled on button click with w2ui.style.column #" },
+        { recid: 9, fname: "Pat", lname: "Tobson", email: "ptob@gmail.com", sdate: "12/12/2012", comment: "styled on button click with w2ui.class.column #" },
+    ]
+})
+
+window.styleToggle = function (recid) {
+    const ind = grid.get(recid, true)
+    const record = grid.records[ind]
+    if(record.w2ui) {
+        delete record.w2ui
+    }
+    else if(recid === 2) {
+        record.w2ui = {
+            style: "background-color: #C2F5B4"
+        }
+    }
+    else if(recid === 3) {
+        record.w2ui = {
+            class: "row"
+        }
+    }
+    else if(recid === 4) {
+        record.w2ui = {
+            style: {
+                lname: "background: red;",
+                email: "font-weight: bold;"
+            }
+        }
+    }
+    else if(recid === 5) {
+        record.w2ui = {
+            class: {
+                fname: "cell1",
+                sdate: "cell2"
+            }
+        }
+    }
+    else if(recid === 8) {
+        record.w2ui = {
+            style: {
+                0: 'text-decoration: underline overline;',
+                1: 'background-color: silver !important; font-weight: bold;',
+            }
+        }
+    }
+    else if (recid === 9) {
+        record.w2ui = {
+            class: {
+                1: 'cell1',
+                2: 'cell2',
+            }
+        }
+    }
+    grid.refreshRow(recid, ind)
+}
+</script>

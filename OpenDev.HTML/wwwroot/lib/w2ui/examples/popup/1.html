@@ -1,0 +1,62 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Simple Popup</h1>
+        Only one popup at a time. It can be either modal or not. If modal, it can only be closed if user
+        clicks the cross button or as a developer you can provide a button to close it. If not modal, clicking
+        outside the popup will close it.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<button class="w2ui-btn" onclick="popup1()">Simple popup</button>
+<button class="w2ui-btn" onclick="popup2()">Popup with buttons and event listeners</button>
+
+<!--CODE-->
+<script type="module">
+import { w2popup } from '__W2UI_PATH__'
+
+window.popup1 = function() {
+    w2popup.open({
+        title: 'Popup Title',
+        text: 'This is text inside the popup'
+    })
+}
+
+window.popup2 = function() {
+    w2popup.open({
+        title: 'Popup Title',
+        text: 'This is text inside the popup',
+        actions: ['Ok', 'Cancel'],
+        width: 500,
+        height: 300,
+        modal: true,
+        showClose: true,
+        showMax: true,
+        onMax(evt) {
+            console.log('max', evt)
+        },
+        onMin(evt) {
+            console.log('min', evt)
+        },
+        onKeydown(evt) {
+            console.log('keydown', evt)
+        }
+    })
+    .then((evt) => {
+        console.log('popup ready')
+    })
+    .close(evt => {
+        console.log('popup clsoed')
+    })
+    .ok((evt) => {
+        console.log('ok', evt)
+        w2popup.close()
+    })
+    .cancel((evt) => {
+        console.log('cancel', evt)
+        w2popup.close()
+    })
+}
+</script>

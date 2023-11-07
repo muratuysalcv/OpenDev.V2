@@ -1,0 +1,42 @@
+﻿@page
+@using System.Net;
+@using System.Text;
+@using Newtonsoft.Json;
+@using OpenDev.Common.ApiModel;
+@using OpenDev
+@using OpenDev.Common.Global;
+@using OpenDev.Core.Engine;
+@using OpenDev.Data.DataModel;
+@model FormsModel
+@{
+    var db = new DbModel();
+    var formKey = Request.Query["f"]+"";
+    var form = db.FormList.FirstOrDefault(x => x.FormKey == formKey);
+    if (form == null)
+        form = new Form();
+}
+<script>
+
+    function PrepareHtmlForTextEditor(html){
+        html = html.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        return html;
+    }
+    var body=`@form.HtmlBody`;
+    body = PrepareHtmlForTextEditor(body);
+    $('#HtmlBody').html(body);
+</script>
+<h1>Body</h1>
+<textarea id="HtmlBody" name="HtmlBody">
+  
+</textarea>
+
+<h1>Head</h1>
+<textarea id="HtmlHead" name="HtmlHead">
+    @form.HtmlHead
+</textarea>
+
+<h1>Foot</h1>
+<textarea id="HtmlFoot" name="HtmlFoot">
+    @form.HtmlFoot
+</textarea>
+<input type="text" value="@form.FormId" id="formId" name="formId" />

@@ -1,0 +1,45 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Simple Toolbar</h1>
+        The example below demonstrates how to create toolbars. The toolbar can hold multiple items and supports sprite icons or
+        iconic fonts. You can have both images and icon fonts in the same toolbar. For the click event info, see the console.
+        <div style="height: 20px"></div>
+        Simple button types are:
+        <ul>
+            <li>button</li>
+            <li>radio</li>
+            <li>check</li>
+            <li>break</li>
+            <li>spacer</li>
+        </ul>
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="toolbar"></div>
+
+<!--CODE-->
+<script type="module">
+import { w2toolbar } from '__W2UI_PATH__'
+
+new w2toolbar({
+    box: '#toolbar',
+    name: 'toolbar',
+    items: [
+        { type: 'button', id: 'item1', text: 'Button', icon: 'w2ui-icon-colors' },
+        { type: 'break' },
+        { type: 'check', id: 'item2', text: 'Check 1', icon: 'w2ui-icon-check' },
+        { type: 'check', id: 'item3', text: 'Check 2', icon: 'w2ui-icon-check' },
+        { type: 'break' },
+        { type: 'radio', id: 'item4', group: '1', text: 'Radio 1', icon: 'w2ui-icon-info', checked: true },
+        { type: 'radio', id: 'item5', group: '1', text: 'Radio 2', icon: 'w2ui-icon-paste' },
+        { type: 'spacer' },
+        { type: 'button', id: 'item6', text: 'Button', icon: 'w2ui-icon-cross' }
+    ],
+    onClick(event) {
+        console.log('Target: '+ event.target, event)
+    }
+})
+</script>

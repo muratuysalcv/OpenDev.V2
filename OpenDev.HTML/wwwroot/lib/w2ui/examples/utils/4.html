@@ -1,0 +1,60 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Tooltips</h1>
+        If you need to attach any overlay to an element or an input control - use w2tooltip. It can be a short or large message and
+        contain any HTML.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<input type="text" id="some-input" class="w2ui-input" style="width: 200px;">
+<div style="height: 20px"></div>
+<div style="width: 200px; float: left">
+    Position:
+    <div style="padding: 10px; margin-bottom: 20px; line-height: 2">
+        <label><input name="postion" type="radio" onclick="setPosition('left')"> &nbsp;left</label><br>
+        <label><input name="postion" type="radio" onclick="setPosition('right')"> &nbsp;right</label><br>
+        <label><input name="postion" type="radio" onclick="setPosition('top')" checked> &nbsp;top</label><br>
+        <label><input name="postion" type="radio" onclick="setPosition('bottom')"> &nbsp;bottom</label><br>
+    </div>
+</div>
+<div style="width: 300px; float: left">
+    Anchor Alignment (only for TOP/BOTTOM):<br>
+    <div style="padding: 10px; margin-bottom: 20px; line-height: 2; float: left; width: 200px">
+        <label><input name="align" type="radio" onclick="setAlign('none')" checked> &nbsp;none</label><br>
+        <label><input name="align" type="radio" onclick="setAlign('left')"> &nbsp;left</label><br>
+        <label><input name="align" type="radio" onclick="setAlign('right')"> &nbsp;right</label><br>
+        <label><input name="align" type="radio" onclick="setAlign('both')"> &nbsp;both</label><br>
+    </div>
+</div>
+<div style="clear: both; height: 10px;"></div>
+
+<button class="w2ui-btn" onclick="showTooltip({})">Dark Tooltip</button>
+<button class="w2ui-btn" onclick="showTooltip({class: 'w2ui-light' })">Light Tooltip</button>
+<button class="w2ui-btn" onclick="hideTooltip()">Hide Tooltip</button>
+
+<!--CODE-->
+<script type="module">
+import { w2utils, w2tooltip } from '__W2UI_PATH__'
+
+let align = 'none';
+let position = 'top';
+let message = 'The message for the <br> tooltip can be<br> quite big and <br>contain any HTML.'
+
+window.setAlign = function (value) { align = value }
+window.setPosition = function (value) { position = value }
+window.showTooltip = function (options) {
+    w2tooltip.show(w2utils.extend(options, {
+        align,
+        position,
+        name: 'tooltip-name',
+        anchor: document.querySelector('#some-input'),
+        html: message
+    }))
+}
+window.hideTooltip = function () {
+    w2tooltip.hide('tooltip-name')
+}
+</script>

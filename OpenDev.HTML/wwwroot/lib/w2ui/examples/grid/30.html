@@ -1,0 +1,73 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Events</h1>
+        Last event is shown in the preview. Log of events is available in the console.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="grid" style="width: 850px; height: 350px;"></div>
+<br><br>
+<b>Event Log</b>
+<div style="height: 5px"></div>
+<div id="preview" style="height: 200px; width: 300px; overflow-y: auto; border: 1px solid #efefef; padding: 5px; padding-bottom: 15px;"></div>
+
+<div style="height: 5px"></div>
+<button class="w2ui-btn" onclick="clearLog()">Clear Log</button>
+
+<!--CODE-->
+<script type="module">
+import { w2grid, w2utils, query } from '__W2UI_PATH__'
+
+let grid = new w2grid({
+    name: 'grid',
+    box: query('#grid')[0],
+    header: 'List of Names',
+    url: 'data/list.json',
+    method: 'GET', // need this to avoid 412 error on Safari
+    show: {
+        header: true,
+        toolbar: true,
+        footer: true,
+        lineNumbers: true,
+        selectColumn: true,
+        expandColumn: true
+    },
+    columns: [
+        { field: 'fname', text: 'First Name', size: '150px', info: true },
+        { field: 'lname', text: 'Last Name', size: '150px' },
+        { field: 'email', text: 'Email', size: '200px' },
+        { field: 'sdate', text: 'Start Date', size: '200px' }
+    ],
+    searches: [
+        { type: 'int',  field: 'recid', label: 'ID' },
+        { type: 'text', field: 'fname', label: 'First Name' },
+        { type: 'text', field: 'lname', label: 'Last Name' },
+        { type: 'date', field: 'sdate', label: 'Start Date' }
+    ],
+    onExpand(event) {
+        query('#'+event.box_id).html('<div style="padding: 10px; height: 100px">Expanded content</div>');
+    }
+})
+// attach event listener for all events
+grid.on('*', (event) => {
+    console.log(event)
+    let txt = event.detail.recid ?? event.detail.clicked?.recid
+    if (txt) {
+        txt = 'rec: ' + txt
+    } else {
+        txt = event.target
+    }
+    query('#preview').append(`<div>
+        <span style="width: 100px; display: inline-block">${txt}</span>
+        ${event.type}
+    </div>`)
+    query('#preview').prop('scrollTop', 100_000)
+})
+
+window.clearLog = function () {
+    query('#preview').html('')
+}
+</script>

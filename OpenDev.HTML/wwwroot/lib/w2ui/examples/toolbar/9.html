@@ -1,0 +1,83 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Custom Buttons</h1>
+        Some toolbar properties can be defined as functions. This approach allows you to create custom toolbar items.
+        <div style="height: 20px"></div>
+        Following properties can be defined as functions:
+        <ul>
+            <li>text</li>
+            <li>html</li>
+            <li>tooltip</li>
+        </ul>
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="toolbar"></div>
+
+<!--CODE-->
+<script type="module">
+import { w2toolbar, query, w2alert } from '__W2UI_PATH__'
+
+new w2toolbar({
+    box: '#toolbar',
+    name: 'toolbar',
+    items: [
+        { type: 'button', id: 'item1', icon: 'fa fa-star', text: 'Click Me',
+            counter: 0,
+            tooltip(item) {
+                return 'Number of clicks: ' + item.counter;
+            },
+            onClick(event) {
+                event.detail.item.counter++;
+            }
+        },
+        { type: 'break' },
+        { type: 'menu-radio', id: 'item2', icon: 'fa fa-star',
+            text(item) {
+                let text = item.selected;
+                let el   = this.get('item2:' + item.selected);
+                return 'Radio: ' + el.text;
+            },
+            selected: 'id1',
+            items: [
+                { id: 'id1', text: 'Item 1', icon: 'fa fa-camera' },
+                { id: 'id2', text: 'Item 2', icon: 'fa fa-picture-o' },
+                { id: 'id3', text: 'Item 3', icon: 'fa fa-glass', count: 12 }
+            ]
+        },
+        { type: 'break' },
+        { type: 'html',  id: 'item5',
+            html(item) {
+                let html = '<div style="padding: 5px">HTML as string</div>';
+                return html;
+            },
+            tooltip: 'some'
+        },
+        { type: 'break' },
+        { type: 'html', id: 'item5a',
+            async onRefresh(event) {
+                await event.complete
+                let fragment = query.html(`
+                    <span>As DOM Nodes: </span>
+                    <div style="display: inline-block; padding: 5px; border: 1px solid silver">Click Me</div>
+                    <input style="margin: 0px 3px; padding: 4px" value="${this.value ?? ''}">`)
+                fragment.filter('div').on('click', event => {
+                    w2alert('DIV Clicked')
+                })
+                fragment.filter('input').on('input', event => {
+                    this.value = event.target.value
+                })
+                query(this.box).find('#tb_toolbar_item_item5a').append(fragment)
+            }
+        },
+        { type: 'break' },
+        { type: 'button', id: 'item6', icon: 'fa fa-star-o', text: 'Refresh',
+            tooltip: 'Click to refresh entire toolbar.<br>Note, input value is preserved.',
+            onClick(event) { this.refresh() }
+        }
+    ]
+})
+</script>

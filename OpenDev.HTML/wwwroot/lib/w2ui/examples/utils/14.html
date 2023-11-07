@@ -1,0 +1,36 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Modern Query (mQuery)</h1>
+        To manipulate DOM, w2ui uses small, embedable DOM manipulation library called
+        <a href="http://github.com/vitmalina/mquery" target="_blank">mQuery</a>.
+        <br>
+        It is easily embedable into any projects, as it is very tiny. And it already comes with w2ui.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div style="height: 100px">
+    Selector: <input id="custom" class="w2ui-input" style="width: 200px" placeholder="Type any selector here..." value="span">
+    <br><br>
+</div>
+
+<div style="height: 10px;"></div>
+<button class="w2ui-btn" onclick="color()">Add .w2ui-marker</button>
+<button class="w2ui-btn" onclick="clearColor()">Clear</button>
+
+<!--CODE-->
+<script type="module">
+import { query } from '__W2UI_PATH__'
+
+window.color = function() {
+    let selector = query('#custom').val()
+    query(selector).addClass('w2ui-marker')
+}
+
+window.clearColor = function() {
+    let selector = query('#custom').val()
+    query(selector).removeClass('w2ui-marker')
+}
+</script>

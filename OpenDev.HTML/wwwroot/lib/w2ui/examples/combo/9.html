@@ -1,0 +1,85 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Popup & Layout</h1>
+        Popup with a layout in it. Layout has 2 panels, one with sidebar another with grid/html.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div style="padding: 20px 0px">
+    <button class="w2ui-btn" onclick="openPopup()">Open Popup</button>
+</div>
+
+<!--CODE-->
+<script type="module">
+import { w2layout, w2sidebar, w2grid, w2popup } from '__W2UI_PATH__'
+
+// widget configuration
+let config = {
+    layout: {
+        name: 'layout',
+        padding: 0,
+        panels: [
+            { type: 'left', size: 200, resizable: true, minSize: 120 },
+            { type: 'main', minSize: 350, overflow: 'hidden' }
+        ]
+    },
+    sidebar: {
+        name: 'sidebar',
+        nodes: [
+            { id: 'general', text: 'General', group: true, expanded: true,
+                nodes: [
+                    { id: 'grid', text: 'Grid', icon: 'fa fa-pencil-square-o', selected: true },
+                    { id: 'html', text: 'Some HTML', icon: 'fa fa-list-alt' }
+                ]
+            }
+        ],
+        onClick(event) {
+            switch (event.target) {
+                case 'grid':
+                    layout.html('main', grid)
+                    break
+                case 'html':
+                    layout.html('main', '<div style="padding: 10px">Some HTML</div>')
+                    break
+            }
+        }
+    },
+    grid: {
+        name: 'grid',
+        style: 'border: 0px; border-left: 1px solid #efefef',
+        columns: [
+            { field: 'state', text: 'State', size: '80px' },
+            { field: 'title', text: 'Title', size: '100%' },
+            { field: 'priority', text: 'Priority', size: '80px', attr: 'align="center"' }
+        ],
+        records: [
+            { recid: 1, state: 'Open', title: 'Short title for the record', priority: 2 },
+            { recid: 2, state: 'Open', title: 'Short title for the record', priority: 3 },
+            { recid: 3, state: 'Closed', title: 'Short title for the record', priority: 1 }
+        ]
+    }
+}
+
+// initialization in memory
+let layout = new w2layout(config.layout)
+let sidebar = new w2sidebar(config.sidebar)
+let grid = new w2grid(config.grid)
+
+window.openPopup = function openPopup() {
+    w2popup.open({
+        title: 'Popup',
+        width: 800,
+        height: 600,
+        showMax: true,
+        body: '<div id="main" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px;"></div>'
+    })
+    .then(() => {
+        layout.render('#w2ui-popup #main')
+        layout.html('left', sidebar)
+        layout.html('main', grid)
+    })
+}
+</script>

@@ -1,0 +1,37 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Color Utils</h1>
+        There are several function to work with colors.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<input id="str" type="text" size="20" onchange="update()" style="border: 1px solid silver; padding: 6px; width: 120px;">
+<br><br>
+<div style="float: left; width: 130px;">Parse Color</div><div id="color1" style="margin-left: 130px;">...</div>
+<div style="float: left; width: 130px;">RGB -> HSV</div> <div id="color2" style="margin-left: 130px;">...</div>
+<div style="float: left; width: 130px;">HSV -> RGB</div> <div id="color3" style="margin-left: 130px;">...</div>
+<br><br>
+
+<!--CODE-->
+<script type="module">
+import { w2utils, w2field, query } from '__W2UI_PATH__'
+
+new w2field('color', { el: query('#str')[0] })
+
+window.update = function() {
+    let val = query('#str').val()
+    let parsed = w2utils.parseColor(val)
+    if (parsed) {
+        query('#color1').html(JSON.stringify(parsed))
+        query('#color2').html(JSON.stringify(w2utils.rgb2hsv(parsed)))
+        query('#color3').html(JSON.stringify(w2utils.hsv2rgb(w2utils.rgb2hsv(parsed))))
+    } else {
+        query('#color1').html('...')
+        query('#color2').html('...')
+        query('#color3').html('...')
+    }
+}
+</script>

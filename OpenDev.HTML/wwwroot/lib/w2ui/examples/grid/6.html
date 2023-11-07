@@ -1,0 +1,68 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Single or Multiple Selection</h1>
+        If multiselect is enabled, use cmd/shift (ctrl/shift on Windows) keys to multiselect. You can also show/hide select column.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="grid" style="width: 800px; height: 260px;"></div>
+<br>
+
+<button class="w2ui-btn" onclick="selColumn(false)">
+    Hide select column
+</button>
+<button class="w2ui-btn" onclick="selColumn(true)">
+    Show select column
+</button>
+
+<label style="position: relative; top: 3px; left: 10px">
+    <input type="checkbox" id="singleOrMulti" style="position: relative; top: 1px; left: -2px;" onclick="multi(this)">
+    Multi Select
+</label>
+
+<!--CODE-->
+<script type="module">
+import { w2grid } from '__W2UI_PATH__'
+
+let grid = new w2grid({
+    name: 'grid',
+    box: '#grid',
+    show: { selectColumn: true },
+    multiSelect: false,
+    columns: [
+        { field: 'recid', text: 'ID', size: '50px' },
+        { field: 'lname', text: 'Last Name', size: '30%' },
+        { field: 'fname', text: 'First Name', size: '30%' },
+        { field: 'email', text: 'Email', size: '40%' },
+        { field: 'sdate', text: 'Start Date', size: '120px' }
+    ],
+    records: [
+        { recid: 1, fname: 'John', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+        { recid: 2, fname: 'Stuart', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+        { recid: 3, fname: 'Jin', lname: 'Franson', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+        { recid: 4, fname: 'Susan', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+        { recid: 5, fname: 'Kelly', lname: 'Silver', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+        { recid: 6, fname: 'Francis', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+        { recid: 7, fname: 'Mark', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+        { recid: 8, fname: 'Thomas', lname: 'Bahh', email: 'jdoe@gmail.com', sdate: '4/3/2012' }
+    ],
+    async onSelect(event) {
+        await event.complete
+        console.log('select', event.detail, this.getSelection())
+    }
+})
+
+window.multi = function(el) {
+    grid.multiSelect = el.checked
+    grid.selectNone()
+    grid.refresh()
+}
+
+window.selColumn = function(flag) {
+    grid.show.selectColumn = flag
+    grid.refresh()
+}
+</script>

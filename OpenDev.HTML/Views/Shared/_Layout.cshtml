@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] - OpenDev.HTML</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="OpenDev is a opensource software development platform." />
+    <meta name="keywords" content="bootstrap 5, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="/lib/img/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="/lib/img/icon/192x192.png">
+    <link rel="stylesheet" href="/lib/css/style.css">
+    <link rel="manifest" href="/lib/__manifest.json">
+    <link rel="stylesheet" href="/lib/css/tabulator.css">
+    <link href="~/lib/dist/w2ui-1.5.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+    <!-- App Header -->
+    <div class="appHeader bg-primary scrolled">
+        <div class="left">
+            <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+                <ion-icon name="menu-outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">
+            Discover
+        </div>
+        <div class="right">
+            <a href="#" class="headerButton toggle-searchbox">
+                <ion-icon name="search-outline"></ion-icon>
+            </a>
+        </div>
+    </div>
+    <!-- * App Header -->
+    <!-- Search Component -->
+    <div id="search" class="appHeader">
+        <form class="search-form">
+            <div class="form-group searchbox">
+                <input type="text" class="form-control" placeholder="Search...">
+                <i class="input-icon">
+                    <ion-icon name="search-outline"></ion-icon>
+                </i>
+                <a href="#" class="ms-1 close toggle-searchbox">
+                    <ion-icon name="close-circle"></ion-icon>
+                </a>
+            </div>
+        </form>
+    </div>
+    <!-- * Search Component -->
+    <!-- App Capsule -->
+    <div id="appCapsule">
+        @RenderBody()
+
+          <!-- app footer -->
+        <div class="appFooter">
+            <img src="/lib/img/logo.png" alt="icon" class="footer-logo mb-2">
+            <div class="footer-title">
+                Copyright © Mobilekit <span class="yearNow"></span>. All Rights Reserved.
+            </div>
+            <div>Mobilekit is PWA ready Mobile UI Kit Template.</div>
+            Great way to start your mobile websites and pwa projects.
+
+            <div class="mt-2">
+                <a href="#" class="btn btn-icon btn-sm btn-facebook">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+                <a href="#" class="btn btn-icon btn-sm btn-twitter">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+                <a href="#" class="btn btn-icon btn-sm btn-linkedin">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+                <a href="#" class="btn btn-icon btn-sm btn-instagram">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+                <a href="#" class="btn btn-icon btn-sm btn-whatsapp">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                </a>
+                <a href="#" class="btn btn-icon btn-sm btn-secondary goTop">
+                    <ion-icon name="arrow-up-outline"></ion-icon>
+                </a>
+            </div>
+
+        </div>
+        <!-- * app footer -->
+    </div>
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
+        <a href="index.html" class="item active">
+            <div class="col">
+                <ion-icon name="home-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="app-components.html" class="item">
+            <div class="col">
+                <ion-icon name="cube-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="page-chat.html" class="item">
+            <div class="col">
+                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                <span class="badge badge-danger">5</span>
+            </div>
+        </a>
+        <a href="app-pages.html" class="item">
+            <div class="col">
+                <ion-icon name="layers-outline"></ion-icon>
+            </div>
+        </a>
+        <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
+            <div class="col">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </a>
+    </div>
+    <!-- * App Bottom Menu -->
+    <!-- App Sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
+        <div class="offcanvas-body">
+            <!-- profile box -->
+            <div class="profileBox">
+                <div class="image-wrapper">
+                    <img src="/lib/img/sample/avatar/avatar1.jpg" alt="image" class="imaged rounded">
+                </div>
+                <div class="in">
+                    <strong>Julian Gruber</strong>
+                    <div class="text-muted">
+                        <ion-icon name="location"></ion-icon>
+                        California
+                    </div>
+                </div>
+                <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+            <!-- * profile box -->
+
+            <ul class="listview flush transparent no-line image-listview mt-2">
+                <li>
+                    <a href="/" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            Ana Sayfa
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="app-components.html" class="item" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="false">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="cube-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            Forms
+                        </div>
+                    </a>
+                    <div class="collapse submenu" id="components-collapse">
+                        <ul class="btn-toggle-nav listview flush transparent no-line image-listview mt-2">
+
+                            <li><a href="/?p=index" class="sublink link-dark rounded">index</a></li>
+
+                            <li><a href="/?p=ide" class="sublink link-dark rounded">IDE</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="app-components.html" class="item" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="false">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="cube-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            Tables
+                        </div>
+                    </a>
+                    <div class="collapse submenu" id="components-collapse">
+                        <ul class="btn-toggle-nav listview flush transparent no-line image-listview mt-2">
+
+                            <li><a href="/?p=list&o=core.access" class="sublink link-dark rounded">core.access</a></li>
+
+                            <li><a href="/?p=list&o=core.app" class="sublink link-dark rounded">core.app</a></li>
+
+                            <li><a href="/?p=list&o=core.cloud" class="sublink link-dark rounded">core.cloud</a></li>
+
+                            <li><a href="/?p=list&o=core.con" class="sublink link-dark rounded">core.con</a></li>
+
+                            <li><a href="/?p=list&o=core.con_type" class="sublink link-dark rounded">core.con_type</a></li>
+
+                            <li><a href="/?p=list&o=core.form" class="sublink link-dark rounded">core.form</a></li>
+
+                            <li><a href="/?p=list&o=core.form_type" class="sublink link-dark rounded">core.form_type</a></li>
+
+                            <li><a href="/?p=list&o=core.setting" class="sublink link-dark rounded">core.setting</a></li>
+
+                            <li><a href="/?p=list&o=core.setting_generic" class="sublink link-dark rounded">core.setting_generic</a></li>
+
+                            <li><a href="/?p=list&o=core.user" class="sublink link-dark rounded">core.user</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="app-pages.html" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="layers-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Pages</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="page-chat.html" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Chat</div>
+                            <span class="badge badge-danger">5</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="moon-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            <div>Dark Mode</div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input dark-mode-switch" type="checkbox" id="darkmodesidebar">
+                                <label class="form-check-label" for="darkmodesidebar"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="listview-title mt-2 mb-1">
+                <span>Friends</span>
+            </div>
+            <ul class="listview image-listview flush transparent no-line">
+                <li>
+                    <a href="page-chat.html" class="item">
+                        <img src="/lib/img/sample/avatar/avatar7.jpg" alt="image" class="image">
+                        <div class="in">
+                            <div>Sophie Asveld</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="page-chat.html" class="item">
+                        <img src="/lib/img/sample/avatar/avatar3.jpg" alt="image" class="image">
+                        <div class="in">
+                            <div>Sebastian Bennett</div>
+                            <span class="badge badge-danger">6</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="page-chat.html" class="item">
+                        <img src="/lib/img/sample/avatar/avatar10.jpg" alt="image" class="image">
+                        <div class="in">
+                            <div>Beth Murphy</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="page-chat.html" class="item">
+                        <img src="/lib/img/sample/avatar/avatar2.jpg" alt="image" class="image">
+                        <div class="in">
+                            <div>Amelia Cabal</div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="page-chat.html" class="item">
+                        <img src="/lib/img/sample/avatar/avatar5.jpg" alt="image" class="image">
+                        <div class="in">
+                            <div>Henry Doe</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- sidebar buttons -->
+        <div class="sidebar-buttons">
+            <a href="#" class="button">
+                <ion-icon name="person-outline"></ion-icon>
+            </a>
+            <a href="#" class="button">
+                <ion-icon name="archive-outline"></ion-icon>
+            </a>
+            <a href="#" class="button">
+                <ion-icon name="settings-outline"></ion-icon>
+            </a>
+            <a href="#" class="button">
+                <ion-icon name="log-out-outline"></ion-icon>
+            </a>
+        </div>
+        <!-- * sidebar buttons -->
+    </div>
+    <!-- * App Sidebar -->
+    <script src="/lib/js/jquery.js"></script>
+    <script src="/lib/js/lib/bootstrap.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="~/lib/dist/w2ui-1.5.js"></script>
+    <script src="/lib/js/tabulator.js"></script>
+    <script src="/lib/js/plugins/splide/splide.min.js"></script>
+    <script src="/lib/js/plugins/progressbar-js/progressbar.min.js"></script>
+    <script src="/lib/js/base.js"></script>
+    <script src="/lib/js/loadeffect.js"></script><!-- Base CodeMirror App -->
+    <script src="/lib/codemirror/lib/codemirror.js?v=v.12151"></script>
+    <!-- CodeMirror - Editing -->
+    <script src="/lib//codemirror/addon/edit/closebrackets.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/edit/closetag.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/edit/matchbrackets.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/edit/matchtags.js?v=v.11824"></script>
+    <script src="/lib//codemirror/keymap/sublime.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/display/fullscreen.js?v=v.11824"></script>
+
+    <script src="/lib//codemirror/addon/dialog/dialog.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/search/searchcursor.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/search/search.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/scroll/annotatescrollbar.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/search/matchesonscrollbar.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/search/jump-to-line.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/comment/comment.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/comment/continuecomment.js"></script>
+    <script src="/lib//codemirror/addon/wrap/hardwrap.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/fold/foldcode.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/fold/foldgutter.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/fold/brace-fold.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/fold/comment-fold.js"></script>
+    <script src="/lib//codemirror/addon/fold/indent-fold.js"></script>
+    <script src="/lib//codemirror/addon/fold/markdown-fold.js"></script>
+    <script src="/lib//codemirror/addon/mode/overlay.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/tern/tern.js?v=v.11824"></script>
+
+    <script src="/lib//codemirror/addon/lint/lint.js?v=v.11824"></script>
+    <link rel="stylesheet" href="/lib//codemirror/addon/lint/lint.css?v=v.11824">
+    <script src="/lib//codemirror/addon/lint/jshint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/lint/jsonlint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/lint/json-lint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/lint/csslint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/lint/css-lint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/lint/javascript-lint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/search/match-highlighter.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/search/searchcursor.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/scroll/annotatescrollbar.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/search/matchesonscrollbar.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/lint/coffeescript-lint.js?v=v.11824"></script>
+
+    <!-- CodeMirror - Hints -->
+    <script src="/lib//codemirror/addon/fold/xml-fold.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/hint/xml-hint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/hint/show-hint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/hint/sql-hint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/hint/css-hint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/hint/javascript-hint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/hint/anyword-hint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/hint/html-hint.js?v=v.11824"></script>
+    <script src="/lib//codemirror/addon/formatting/codemirror-formatting.js?v=v.11824"></script>
+    <!-- CodeMirror Modes -->
+    <script src="/lib//codemirror/mode/sql/sql.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/sql/sql-formatter.min.js?v=v.11824"></script>
+
+    <script src="/lib//codemirror/mode/xml/xml.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/htmlmixed/htmlmixed.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/css/css.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/javascript/javascript.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/css/css.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/htmlmixed/htmlmixed.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/http/http.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/htmlembedded/htmlembedded.js?v=v.11824"></script>
+    <script src="/lib//codemirror/mode/markdown/markdown.js?v=v.11824"></script>
+
+    <script src="/lib//codemirror/lib/formatting.js?v=v.11824"></script>
+    <!-- CodeMirror - CSS -->
+    <link href="/lib//codemirror/lib/codemirror.css?v=v.11824" rel="stylesheet">
+    <link href="/lib//codemirror/theme/dracula.css?v=v.11824" rel="stylesheet">
+    <link rel="stylesheet" href="/lib//codemirror/theme/monokai.css?v=v.11824">
+    <link rel="stylesheet" href="/lib//codemirror/addon/display/fullscreen.css?v=v.11824">
+    <link href="/lib//codemirror/addon/hint/show-hint.css?v=v.11824" rel="stylesheet" />
+    <link href="/lib//codemirror/addon/search/matchesonscrollbar.css?v=v.11824" rel="stylesheet">
+    <link href="/lib//codemirror/addon/dialog/dialog.css?v=v.11824" rel="stylesheet" />
+    <link href="/lib//codemirror/addon/tern/tern.css?v=v.11824" rel="stylesheet">
+    <link href="/lib//codemirror/addon/fold/foldgutter.css?v=v.11824" rel="stylesheet">
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,45 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Slide a Message</h1>
+        Though you can only open one popup at a time, in some cases you might need to show addition info w/o closing the popup. This is where sliding a message can help.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<button class="w2ui-btn" onclick="popup()">Open Popup</button>
+
+<!--CODE-->
+<script type="module">
+import { w2popup } from '__W2UI_PATH__'
+
+window.popup = function() {
+    w2popup.open({
+        title: 'Popup Title',
+        width: 800,
+        height: 500,
+        text: 'This is text inside the popup',
+        actions: ['Show Message', 'Longer Message', 'Close'],
+        showMax: true
+    })
+    .showMessage(() => {
+        showMessage('Click on the message to hide it or hit escape')
+    })
+    .longerMessage(() => {
+        showMessage('This is a longer message that can have html and other formatting. This is a longer message that can have html and other formatting. ')
+    })
+    .close(() => {
+        w2popup.close()
+    })
+}
+
+window.showMessage = function(text) {
+    w2popup.message({
+        text,
+        width: 400,
+        height: 180,
+        hideOn: ['esc', 'click']
+    });
+}
+</script>

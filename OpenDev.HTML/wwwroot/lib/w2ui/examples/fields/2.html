@@ -1,0 +1,121 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Date, Time & Datetime</h1>
+        For DATE, TIME and DATETIME controls you can use keyboard to increment by a day (or a minute) if you
+        click up/down arrow keys. You can also use ctr + up/down (command + up/down on mac) to
+        increment by a month (or an hour).
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+
+<div class="block">
+    <b>US Format</b>
+</div>
+<div class="w2ui-field">
+    <label>Date:</label>
+    <div> <input type="us-date"> </div>
+</div>
+<div class="w2ui-field">
+    <label>From-To:</label>
+    <div> <input type="us-dateA"> <span class="legend">(from 10th to 20th of current month)</span> </div>
+</div>
+<div class="w2ui-field">
+    <label>Blocked Days:</label>
+    <div> <input type="us-dateB"> <span class="legend">(12,13,14 of current month are blocked)</span> </div>
+</div>
+<div class="w2ui-field">
+    <label>Date Range:</label>
+    <div> <input type="us-date1"> - <input type="us-date2"> </div>
+</div>
+<div class="w2ui-field">
+    <label>Time:</label>
+    <div> <input type="us-time"> </div>
+</div>
+<div class="w2ui-field">
+    <label>From-To:</label>
+    <div> <input type="us-timeA"> <span class="legend">(from 8:00 am to 4:30 pm)</span> </div>
+</div>
+<div class="w2ui-field dt">
+    <label>Datetime:</label>
+    <div> <input type="us-datetime"> </div>
+</div>
+
+<div class="block">
+    <b>EU Common Format</b>
+</div>
+<div class="w2ui-field">
+    <label>Date:</label>
+    <div> <input type="eu-date"> </div>
+</div>
+<div class="w2ui-field">
+    <label>From-To:</label>
+    <div> <input type="eu-dateA"> <span class="legend">(from 10th to 20th of current month)</span> </div>
+</div>
+<div class="w2ui-field">
+    <label>Blocked Days:</label>
+    <div> <input type="eu-dateB"> <span class="legend">(12,13,14 of current month are blocked)</span> </div>
+</div>
+<div class="w2ui-field">
+    <label>Date Range:</label>
+    <div> <input type="eu-date1"> - <input type="eu-date2"> </div>
+</div>
+<div class="w2ui-field">
+    <label>Time:</label>
+    <div> <input type="eu-time"> </div>
+</div>
+<div class="w2ui-field">
+    <label>From-To:</label>
+    <div> <input type="eu-timeA"> <span class="legend">(from 8:00 am to 4:30 pm)</span> </div>
+</div>
+<div class="w2ui-field dt">
+    <label>Datetime:</label>
+    <div> <input type="eu-datetime"> </div>
+</div>
+
+<style>
+.block {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: #999;
+}
+.w2ui-field input {
+    width: 90px;
+}
+.w2ui-field.dt input {
+    width: 140px;
+}
+.w2ui-field > div > span {
+    margin-left: 20px;
+}
+</style>
+
+<!--CODE-->
+<script type="module">
+import { w2field, query } from '__W2UI_PATH__'
+
+let month = (new Date()).getMonth() + 1
+let year  = (new Date()).getFullYear()
+
+// US Format
+new w2field('date', { el: query('input[type=us-date]')[0] })
+new w2field('date', { el: query('input[type=us-dateA]')[0], format: 'm/d/yyyy', start:  month + '/5/' + year, end: month + '/25/' + year })
+new w2field('date', { el: query('input[type=us-dateB]')[0], format: 'm/d/yyyy', blockDates: [ month+'/12/' + year,month+'/13/' + year,month+'/14/' + year]})
+new w2field('date', { el: query('input[type=us-date1]')[0], format: 'm/d/yyyy', end: query('input[type=us-date2]')[0] })
+new w2field('date', { el: query('input[type=us-date2]')[0], format: 'm/d/yyyy', start: query('input[type=us-date1]')[0] })
+new w2field('time', { el: query('input[type=us-time]')[0], format: 'h12' })
+new w2field('time', { el: query('input[type=us-timeA]')[0], format: 'h12', start: '8:00 am', end: '4:30 pm' })
+new w2field('datetime', { el: query('input[type=us-datetime]')[0] })
+
+// EU Common el, Format
+new w2field('date',  { el: query('input[type=eu-date]')[0], format: 'd.m.yyyy' })
+new w2field('date', { el: query('input[type=eu-dateA]')[0], format: 'd.m.yyyy', start:  '5.' + month + '.' + year, end: '25.' + month + '.' + year })
+new w2field('date', { el: query('input[type=eu-dateB]')[0], format: 'd.m.yyyy', blockDates: ['12.' + month + '.' + year, '13.' + month + '.' + year, '14.' + month + '.' + year]})
+new w2field('date', { el: query('input[type=eu-date1]')[0], format: 'd.m.yyyy', end: query('input[type=eu-date2]')[0] })
+new w2field('date', { el: query('input[type=eu-date2]')[0], format: 'd.m.yyyy', start: query('input[type=eu-date1]')[0] })
+new w2field('time',  { el: query('input[type=eu-time]')[0], format: 'h24' })
+new w2field('time', { el: query('input[type=eu-timeA]')[0], format: 'h24', start: '8:00 am', end: '4:30 pm' })
+new w2field('datetime', { el: query('input[type=eu-datetime]')[0], format: 'dd.mm.yyyy|h24:mm' })
+</script>

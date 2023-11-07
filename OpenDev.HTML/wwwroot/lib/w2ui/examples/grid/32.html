@@ -1,0 +1,57 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Context Messages</h1>
+        You can open a message or a confirmation dialog within the grid.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="grid" style="width: 600px; height: 250px"></div>
+<br>
+<button class="w2ui-btn" onclick="showMessage()">Show Message</button>
+<button class="w2ui-btn" onclick="showConfirm()">Show Confirmation (2.0+)</button>
+<span id="log"></span>
+
+<!--CODE-->
+<script type="module">
+import { w2grid, w2field, query } from '__W2UI_PATH__'
+
+let grid = new w2grid({
+    name: 'grid',
+    box: '#grid',
+    columns: [
+        { field: 'fname', text: 'First Name', size: '120px', searchable: true },
+        { field: 'lname', text: 'Last Name', size: '120px', searchable: true },
+        { field: 'email', text: 'Email', size: '100%' },
+        { field: 'sdate', text: 'Start Date', size: '100px' }
+    ],
+})
+grid.load('data/list.json')
+
+window.showMessage = function() {
+    grid.message('Message <span id="ready"></span>')
+        .then(() => {
+            query(grid.box).find('.w2ui-message #ready').html('- ready')
+            query('#log').html('Message is opened.')
+        })
+        .ok(() => {
+            query('#log').html('Ok is clicked.')
+        })
+}
+
+window.showConfirm = function() {
+    grid.confirm('Message <span id="ready"></span>')
+        .then(() => {
+            query(grid.box).find('.w2ui-message #ready').html('- ready')
+            query('#log').html('Message is opened.')
+        })
+        .yes(() => {
+            query('#log').html('Yes clicked.')
+        })
+        .no(() => {
+            query('#log').html('No clicked.')
+        })
+}
+</script>

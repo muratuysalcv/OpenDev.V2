@@ -1,0 +1,69 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Add/Remove Tabs</h1>
+        You can add remove tabs quickly or with animation.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="tabs" style="width: 100%;"></div>
+<br><br>
+<button class="w2ui-btn" onclick="addTab()">Add 1 Tab</button>
+<button class="w2ui-btn" onclick="addTabs()">Add 3 Tab</button>
+<button class="w2ui-btn" onclick="insertTab()">Insert Tab</button>
+
+<div style="height: 15px"></div>
+<button class="w2ui-btn" onclick="removeTab()">Remove Last Tab</button>
+<button class="w2ui-btn" onclick="removeTabs()">Remove All Inserted</button>
+
+<!--CODE-->
+<script type="module">
+import { w2tabs } from '__W2UI_PATH__'
+
+let tabs = new w2tabs({
+    box: '#tabs',
+    name: 'tabs',
+    active: 'first',
+    tabs: [
+        { id: 'first', text: 'First Tab' }
+    ]
+})
+
+let ind = 1;
+
+window.addTab = function() {
+    tabs.add({ id: 'tab'+ind, text: 'Tab '+ ind })
+    tabs.refresh()
+    ind++
+}
+
+window.addTabs = function() {
+    tabs.add([
+        { id: 'tab'+ind, text: 'Tab '+ ind },
+        { id: 'tab'+(ind+1), text: 'Tab '+ (ind+1) },
+        { id: 'tab'+(ind+2), text: 'Tab '+ (ind+2) }
+    ])
+    tabs.refresh()
+    ind += 3
+}
+
+window.insertTab = function() {
+    tabs.insert('first', { id: 'tab'+ ind, text: 'Tab '+ ind })
+    ind++
+}
+
+window.removeTab = function() {
+    if (ind == 1) return
+    ind--
+    tabs.remove('tab'+ ind)
+}
+
+window.removeTabs = function() {
+    let tb = tabs.get()
+    tb.splice(tb.indexOf('first'), 1)
+    tabs.remove.apply(tabs, tb)
+    ind = 1
+}
+</script>

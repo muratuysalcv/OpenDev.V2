@@ -1,0 +1,52 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Focus Trap</h1>
+        Tabbing through with popup opened wil keep focus inside the popup. There are also new events on popup lelel, such as
+        <ul>
+            <li>onKeydown</li>
+            <li>onMove</li>
+        </ul>
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<button class="w2ui-btn" onclick="popup()">Open Popup</button>
+
+<!--CODE-->
+<script type="module">
+import { w2popup } from '__W2UI_PATH__'
+
+window.popup = function() {
+    w2popup.open({
+        width: 580,
+        height: 400,
+        title: 'Title',
+        focus: 0,
+        body: `
+            <div class="w2ui-centered" style="line-height: 1.8">
+                <div>
+                Use tab key to loop through the input controls. <br>The focus will not leave popup. <br><br>
+                Text 1: <input class="w2ui-input" style="margin-bottom: 5px"><br>
+                Text 2: <input class="w2ui-input" style="margin-bottom: 5px"><br>
+                Text 3: <input class="w2ui-input" style="margin-bottom: 5px"><br>
+                </div>
+            </div>`,
+        actions: {
+            Ok() {
+                w2popup.close()
+            },
+            Cancel() {
+                w2popup.close()
+            }
+        },
+        onKeydown(event) {
+            console.log('keydown', event)
+        },
+        onMove(event) {
+            console.log('popup moved', event)
+        }
+    });
+}
+</script>

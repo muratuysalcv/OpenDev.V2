@@ -1,0 +1,45 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Promises</h1>
+        Open, load, and message function will now return a promise which is resolved when popup is inserted into the DOM and ready (though still opening).
+        <br><br>
+        Also, to improve testing, several promises have been added to query('#w2ui-popup')[0]._w2popup element that can be awaited. They are:
+        <ul>
+            <li>created</li>
+            <li>opened</li>
+            <li>closing</li>
+            <li>closed</li>
+        </ul>
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<button class="w2ui-btn" onclick="popup()">Open Popup</button>
+
+<!--CODE-->
+<script type="module">
+import { w2popup } from '__W2UI_PATH__'
+
+window.popup = function() {
+    w2popup.open('Some text', { actions: ['Ok', 'Cancel', "Other Message"] })
+        .then(() => {
+            console.log('popup is ready')
+        })
+        .ok(() => {
+            console.log('Ok button is clicked')
+            w2popup.close()
+        })
+        .cancel(() => {
+            console.log('Cancel button is clicked')
+            w2popup.close()
+        })
+        .otherMessage(() => {
+            w2popup.message('A message')
+                .close(() => {
+                    console.log('Message Closed')
+                })
+        })
+}
+</script>

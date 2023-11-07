@@ -1,0 +1,66 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Simple Form</h1>
+        You can bind your form to existing HTML (either in code or loaded from a file).
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="form" style="width: 750px">
+    <div class="w2ui-page page-0">
+        <div class="w2ui-column-container">
+            <div class="w2ui-column col-0">
+                <div class="w2ui-field w2ui-span6">
+                    <label>First Name</label>
+                    <div><input id="first_name" name="first_name" class="w2ui-input" style="width: 300px" type="text" tabindex="1"></div>
+                </div>
+                <div class="w2ui-field w2ui-span6">
+                    <label>Last Name</label>
+                    <div><input id="last_name" name="last_name" class="w2ui-input" style="width: 300px" type="text" tabindex="2"></div>
+                </div>
+                <div class="w2ui-field w2ui-span6">
+                    <label>Comments</label>
+                    <div>
+                        <textarea id="comments" name="comments" class="w2ui-input" style="width: 300px; height: 60px" type="text" tabindex="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w2ui-buttons">
+        <button name="reset" class="w2ui-btn " tabindex="4">Reset</button>
+        <button name="save" class="w2ui-btn w2ui-btn-blue" tabindex="5">Save</button>
+    </div>
+</div>
+
+<!--CODE-->
+<script type="module">
+import { w2form, query } from '__W2UI_PATH__'
+
+// this function triggers on document.ready
+let form = new w2form({
+    box: '#form',
+    name: 'form',
+    record: {
+        first_name: 'John',
+        last_name: 'Doe'
+    },
+    // formURL: 'data/form.html',    // you can load form from extenral file
+    formHTML: query('#form').html(), // or you can use form that is already in HTML
+    fields: [
+        { field: 'first_name', type: 'text', required: true },
+        { field: 'last_name',  type: 'text', required: true },
+        { field: 'comments',   type: 'text'}
+    ],
+    actions: {
+        reset() {
+            this.clear()
+        },
+        save() {
+            this.save()
+        }
+    }
+})
+</script>

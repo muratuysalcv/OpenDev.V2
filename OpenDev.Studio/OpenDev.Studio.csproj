@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\js\plugins\progressbar-js\progressbar.min.js" />
+    <None Include="wwwroot\lib\js\plugins\splide\splide.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenDev.Common\OpenDev.Common.csproj" />
+    <ProjectReference Include="..\OpenDev.Core\OpenDev.Core.csproj" />
+  </ItemGroup>
+
+</Project>

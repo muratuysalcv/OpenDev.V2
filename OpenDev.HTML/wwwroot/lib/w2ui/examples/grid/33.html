@@ -1,0 +1,78 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Live updates</h1>
+        If the data in the grid changes frequently, you can call grid.update() method that will just updates values
+        in the cells with minimum DOM updates. Works nicely with virtual scroll and custom column render functions.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="grid" style="width: 800px; height: 500px"></div>
+<br>
+<button class="w2ui-btn" onclick="live(200)">5 hertz</button>
+<button class="w2ui-btn" onclick="live(100)">10 hertz</button>
+<button class="w2ui-btn" onclick="live(10)">100 hertz</button>
+<button class="w2ui-btn" onclick="live()">Stop</button>
+&nbsp;
+<span id="log"></span>
+
+<!--CODE-->
+<script type="module">
+import { w2grid, query } from '__W2UI_PATH__'
+
+let grid = new w2grid({
+    name: 'grid',
+    box: '#grid',
+    show: {
+        lineNumbers: true,
+        footer: true
+    },
+    url: 'data/list3.json',
+    method: 'GET', // need this to avoid 412 error on Safari
+    limit: 50,
+    autoLoad: false,
+    columns: [
+        { field: 'fname', text: 'First Name', size: '200px' },
+        { field: 'lname', text: 'Last Name', size: '200px' },
+        { field: 'sdate', text: 'Start Date', size: '140px' },
+        { field: 'random', text: 'Random', size: '100%' },
+    ],
+})
+
+let timeout
+
+window.live = function(time) {
+    let stats = []
+    clearInterval(timeout)
+    if (time) {
+        timeout = setInterval(() => {
+            grid.records.forEach(rec => {
+                let rnd = Math.floor(Math.random() * 10000) / 10000
+                if (rec._fname == null) {
+                    rec._fname = rec.fname
+                    rec._lname = rec.lname
+                    rec._sdate = rec.sdate
+                }
+                if (rnd > 0.5) {
+                    rec.w2ui = { style: 'color: ' + (Math.random() > 0.7 ? 'red' : 'green') }
+                } else {
+                    rec.w2ui = { style: '' }
+                }
+                rec.fname = rec._fname + ' ' + rnd
+                rec.lname = rec._lname + ' ' + rnd
+                rec.sdate = rec._sdate + ' ' + rnd
+                rec.random = 'Rand: ' + rnd
+            })
+            if (stats.length > (1000 / time)) {
+                // calculate average time
+                let avg = Math.floor(Math.round(stats.reduce((prev, curr) => prev + curr) / stats.length * 10)) / 10
+                query('#log').html('Average update time: ' + avg + ' ms')
+                stats = []
+            }
+            stats.push(grid.update())
+        }, time)
+    }
+}
+</script>

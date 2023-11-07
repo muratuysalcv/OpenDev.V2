@@ -1,0 +1,70 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Enable/Disable Fields</h1>
+        There is an easy way to enable/disable specified fields.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="form" style="width: 750px;"></div>
+<br>
+<button class="w2ui-btn" onclick="disable()">Disable</button>
+<button class="w2ui-btn" onclick="enable()">Enable</button>
+<br>
+
+<!--CODE-->
+<script type="module">
+import { w2form, w2ui, w2popup, w2alert } from '__W2UI_PATH__'
+
+let form = new w2form({
+    box: '#form',
+    name: 'form',
+    header: 'Auto-Generated Form',
+    url: 'server/post',
+    fields: [
+        { field: 'first_name', type: 'text', required: true,
+            html: { label: 'First Name', attr: 'style="width: 200px"' }
+        },
+        { field: 'last_name',  type: 'text', required: true,
+            html: { label: 'Last Name', attr: 'style="width: 200px"' }
+        },
+        { field: 'comments', type: 'textarea',
+            html: { label: 'Comments', attr: 'style="width: 200px; height: 60px"' }
+        },
+        { field: 'city', type: 'text',
+            html: { label: 'City', attr: 'style="width: 200px"', column: 2, }
+        },
+        { field: 'zip', type: 'text', disabled: true,
+            html: { label: 'Zip Code', attr: 'style="width: 100px"', column: 2, }
+        },
+        { field: 'street', type: 'text',
+            html: { label: 'Street', attr: 'style="width: 200px"', column: 2, }
+        },
+    ],
+    actions: {
+        Reset(event) {
+            this.clear()
+        },
+        Save(event) {
+            if (w2ui.form.validate().length == 0) {
+                w2popup.open({
+                    title: 'Form Data',
+                    with: 600,
+                    height: 550,
+                    body: `<pre>${JSON.stringify(this.getCleanRecord(), null, 4)}</pre>`,
+                    actions: { Ok: w2popup.close }
+                })
+            }
+        }
+    }
+})
+
+window.disable = function() {
+    console.log(w2ui.form.disable('street', 'first_name', 'bad_field'))
+}
+window.enable = function() {
+    console.log(w2ui.form.enable('street', 'first_name', 'bad_field'))
+}
+</script>

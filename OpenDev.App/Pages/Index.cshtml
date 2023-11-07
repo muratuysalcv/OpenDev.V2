@@ -1,0 +1,68 @@
+﻿@page
+@using System.Net;
+@using System.Text;
+@using Newtonsoft.Json;
+@using OpenDev.Common.ApiModel;
+@model IndexModel
+@{
+
+
+    ViewData["Title"] = "Home page";
+    //var page = "index";
+    //var appKey = "core";
+
+    var pageBody = "";
+
+    //Uri uri=new Uri ("https://localhost:7282/api/render");
+    string json = @"{
+                      ""appkey"": ""core"",
+                      ""formkey"": ""index"",
+                      ""requestparamlist"": [
+                        {
+                            ""paramname"": ""string"",
+                          ""paramvalue"": ""string"",
+                          ""datatype"": ""string""
+                        }
+                      ]
+                    }";
+
+    //byte[] bytes = UTF8Encoding.UTF8.GetBytes(json);
+
+    //HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create(uri);
+    //httpWReq.Method = "POST";
+    //httpWReq.ContentType = "application/json";
+    //httpWReq.ContentLength = bytes.Length;
+    //using (Stream stream = httpWReq.GetRequestStream())
+    //{
+    //    stream.Write(bytes, 0, bytes.Length);
+    //}
+    //HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
+    //String charset = response.CharacterSet;
+    //Stream inputStream = response.GetResponseStream();
+
+    //string responseString;
+    //if (String.IsNullOrWhiteSpace(charset))
+    //{
+    //    responseString = new StreamReader(inputStream, true).ReadToEnd();
+    //}
+    //else
+    //{
+    //    Encoding encoding = Encoding.GetEncoding(charset);
+    //    responseString = new StreamReader(inputStream, encoding).ReadToEnd();
+    //}
+
+    var responseModel = new RenderResponse();
+    using (var httpClient = new HttpClient())
+    {
+        //StringContent content = new StringContent(JsonConvert.SerializeObject(reservation), Encoding.UTF8, "application/json");
+
+        using (var response = await httpClient.GetAsync("https://api.opendev.com/api/getrender"))
+        {
+            string apiResponse = await response.Content.ReadAsStringAsync();
+            responseModel = JsonConvert.DeserializeObject<RenderResponse>(apiResponse);
+        }
+    }
+
+
+}
+@Html.Raw(responseModel.HTML)

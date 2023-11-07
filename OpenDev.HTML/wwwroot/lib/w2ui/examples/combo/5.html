@@ -1,0 +1,57 @@
+<div class="content">
+    <div id="example_title">
+        <h1>Infinite Scroll</h1>
+        Records can be loaded on demand as user scrolls. The grid below points to a set of 50 generated
+        records that can be loaded indefinetly.
+    </div>
+    <div id="example_view"></div>
+    <div id="example_code"></div>
+</div>
+
+<!--CODE-->
+<div id="main" style="width: 100%; height: 400px;"></div>
+<br>
+<label>
+    <input type="checkbox" id="autoLoad" onclick="refreshGrid(this.checked)" checked>
+    Auto Load
+</label>
+
+<!--CODE-->
+<script type="module">
+import { w2grid, w2utils } from '__W2UI_PATH__'
+
+// widget configuration
+let config = {
+    grid: {
+        name: 'grid',
+        box: '#main',
+        url: 'data/list3.json',
+        show: {
+            footer: true,
+            toolbar: true,
+            lineNumbers: true
+        },
+        limit: 50,
+        columns: [
+            { field: 'recid', text: 'ID', size: '100px' },
+            { field: 'fname', text: 'First Name', size: '200px', searchable: 'text' },
+            { field: 'lname', text: 'Last Name', size: '200px', searchable: 'text' },
+            { field: 'sdate', text: 'Date Range', size: '100%' }
+        ],
+        onLoad(event) {
+            let data = w2utils.clone(event.detail.data)
+            data.records.forEach((rec, ind) => {
+                rec.recid = 'recid-' + (this.records.length + ind)
+            })
+            event.detail.data = data
+        }
+    }
+}
+
+window.refreshGrid = function(auto) {
+    grid.autoLoad = auto
+    grid.skip(0)
+}
+
+let grid = new w2grid(config.grid)
+</script>
